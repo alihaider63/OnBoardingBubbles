@@ -42,3 +42,7 @@ BubbleShowCaseBuilder(this) //Activity instance
                 .targetView(view) //View to point out
                 .show() //Display the ShowCase
 ```
+
+Special Thanks to original Publisher
+[BubbleShowCase-Android](https://github.com/ECLaboratorio/BubbleShowCase-Android)
+
