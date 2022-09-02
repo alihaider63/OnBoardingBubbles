@@ -1,12 +1,14 @@
 # OnBoardingBubbles - Android
  [![](https://jitpack.io/v/alihaider63/OnBoardingBubbles.svg)](https://jitpack.io/#alihaider63/OnBoardingBubbles)
+ 
+ Add the library into your proyect is really easy, you just need to add this line in dependencies block in your app Gradle:
 ```groovy
 dependencies {
     implementation 'com.github.alihaider63:OnBoardingBubbles:VERSION'
 }
   ```
 
-  <img src="resources/sample.gif" alt="GIF" height="700"/>
+<img src="resourses/sample.gif" alt="GIF" height="700"/>
   
   ## How to use:
   
