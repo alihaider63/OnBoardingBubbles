@@ -118,6 +118,10 @@ class BubbleMessageView : ConstraintLayout {
         if (builder.mShowNextButton) {
             nextButton?.visibility = View.VISIBLE
         }
+
+        if (builder.mNextButtonText != null) {
+            nextButton?.text = builder.mNextButtonText
+        }
     }
 
     private fun setBubbleListener(builder: Builder) {
@@ -288,6 +292,7 @@ class BubbleMessageView : ConstraintLayout {
         var mArrowPosition = ArrayList<BubbleShowCase.ArrowPosition>()
         var mListener: OnBubbleMessageViewListener? = null
         var mShowNextButton: Boolean = false
+        var mNextButtonText: String? = null
 
         fun from(context: Context): Builder {
             mContext = WeakReference(context)
@@ -352,6 +357,11 @@ class BubbleMessageView : ConstraintLayout {
 
         fun showNextButton(showNextButton: Boolean): Builder {
             mShowNextButton = showNextButton
+            return this
+        }
+
+        fun setNextButtonText(text: String?): Builder {
+            mNextButtonText = text
             return this
         }
 

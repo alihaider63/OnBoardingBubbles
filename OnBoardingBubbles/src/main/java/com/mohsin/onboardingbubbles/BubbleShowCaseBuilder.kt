@@ -33,6 +33,7 @@ class BubbleShowCaseBuilder(activity: Activity) {
     internal var mBubbleShowCaseListener: BubbleShowCaseListener? = null
     internal var mSequenceShowCaseListener: SequenceShowCaseListener? = null
     internal var mShowNextButton: Boolean = false
+    internal var mNextButtonText: String? = null
 
     private var onGlobalLayoutListenerTargetView: ViewTreeObserver.OnGlobalLayoutListener? = null
 
@@ -221,6 +222,15 @@ class BubbleShowCaseBuilder(activity: Activity) {
      */
     fun showNextButton(show: Boolean): BubbleShowCaseBuilder {
         mShowNextButton = show
+        return this
+    }
+
+    /**
+     *  Set a text of Next Button
+     *  Default value -> Next
+     */
+    fun setNextButtonText(text: String): BubbleShowCaseBuilder {
+        mNextButtonText = text
         return this
     }
 

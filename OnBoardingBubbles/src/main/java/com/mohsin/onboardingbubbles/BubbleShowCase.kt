@@ -59,6 +59,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder) {
     private val mSubtitleTextSize: Int? = builder.mSubtitleTextSize
     private val mShowOnce: String? = builder.mShowOnce
     private val mShowNextButton: Boolean = builder.mShowNextButton
+    private val mNextButtonText: String? = builder.mNextButtonText
     private val mDisableTargetClick: Boolean = builder.mDisableTargetClick
     private val mDisableCloseAction: Boolean = builder.mDisableCloseAction
     private val mHighlightMode: HighlightMode? = builder.mHighlightMode
@@ -195,6 +196,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder) {
             .subtitle(mSubtitle)
             .image(mImage)
             .showNextButton(mShowNextButton)
+            .setNextButtonText(mNextButtonText)
             .closeActionImage(mCloseAction)
             .disableCloseAction(mDisableCloseAction)
             .listener(object : OnBubbleMessageViewListener {

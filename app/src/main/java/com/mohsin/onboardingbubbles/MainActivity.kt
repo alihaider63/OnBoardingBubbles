@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             .descriptionTextSize(16)
             .closeActionImage(null)
             .showNextButton(true)
+            .setNextButtonText("Finish")
             .targetView(binding.buttonTextSizeShowCase)
     }
 
