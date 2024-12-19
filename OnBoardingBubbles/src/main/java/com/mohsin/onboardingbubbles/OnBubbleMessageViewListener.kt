@@ -16,4 +16,9 @@ interface OnBubbleMessageViewListener {
      * It is called when a user clicks the Next Button
      */
     fun onNextButtonClick()
+
+    /**
+     * It is called when a user clicks the label Button
+     */
+    fun onLabelButtonClick()
 }

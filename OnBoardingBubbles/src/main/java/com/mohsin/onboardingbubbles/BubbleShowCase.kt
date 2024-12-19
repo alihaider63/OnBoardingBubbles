@@ -7,7 +7,6 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.view.View
@@ -58,8 +57,8 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder) {
     private val mTitleTextSize: Int? = builder.mTitleTextSize
     private val mSubtitleTextSize: Int? = builder.mSubtitleTextSize
     private val mShowOnce: String? = builder.mShowOnce
-    private val mShowNextButton: Boolean = builder.mShowNextButton
     private val mNextButtonText: String? = builder.mNextButtonText
+    private val mLabelButtonText: String? = builder.mLabelButtonText
     private val mDisableTargetClick: Boolean = builder.mDisableTargetClick
     private val mDisableCloseAction: Boolean = builder.mDisableCloseAction
     private val mHighlightMode: HighlightMode? = builder.mHighlightMode
@@ -195,8 +194,8 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder) {
             .title(mTitle)
             .subtitle(mSubtitle)
             .image(mImage)
-            .showNextButton(mShowNextButton)
-            .setNextButtonText(mNextButtonText)
+            .nextButtonText(mNextButtonText)
+            .labelButtonText(mLabelButtonText)
             .closeActionImage(mCloseAction)
             .disableCloseAction(mDisableCloseAction)
             .listener(object : OnBubbleMessageViewListener {
@@ -214,6 +213,10 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder) {
                     mBubbleShowCaseListener?.onNextButtonClick()
                 }
 
+                override fun onLabelButtonClick() {
+                    dismiss()
+                    mBubbleShowCaseListener?.onLabelButtonClick()
+                }
             })
     }
 
@@ -314,6 +317,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder) {
                     showCaseParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
                 }
             }
+
             ArrowPosition.RIGHT -> {
                 showCaseParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT)
                 if (ScreenUtils.isViewLocatedAtHalfTopOfTheScreen(mActivity.get()!!, targetView)) {
@@ -338,6 +342,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder) {
                     showCaseParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
                 }
             }
+
             ArrowPosition.TOP -> {
                 showCaseParams.addRule(RelativeLayout.ALIGN_PARENT_TOP)
                 if (ScreenUtils.isViewLocatedAtHalfLeftOfTheScreen(mActivity.get()!!, targetView)) {
@@ -360,6 +365,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder) {
                     )
                 }
             }
+
             ArrowPosition.BOTTOM -> {
                 showCaseParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
                 if (ScreenUtils.isViewLocatedAtHalfLeftOfTheScreen(mActivity.get()!!, targetView)) {

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="next_label">Next</string>
+    <string name="got_it_label">Got it</string>
+    <string name="title">Title</string>
+    <string name="example">We\'ll show you how easy it is to be a part of the group chats with your classmates on CircleIn and you\'ll get 50,000 points. And the points you earn convert into gift cards at restaurants or other stores.</string>
 </resources>

@@ -32,8 +32,8 @@ class BubbleShowCaseBuilder(activity: Activity) {
     internal var mTargetView: WeakReference<View>? = null
     internal var mBubbleShowCaseListener: BubbleShowCaseListener? = null
     internal var mSequenceShowCaseListener: SequenceShowCaseListener? = null
-    internal var mShowNextButton: Boolean = false
     internal var mNextButtonText: String? = null
+    internal var mLabelButtonText: String? = null
 
     private var onGlobalLayoutListenerTargetView: ViewTreeObserver.OnGlobalLayoutListener? = null
 
@@ -217,20 +217,19 @@ class BubbleShowCaseBuilder(activity: Activity) {
     }
 
     /**
-     * If this variable is true, Next button will be Visible
-     *  Default value -> false
+     *  Set a text of Next Button
+     *  Default value -> Next
      */
-    fun showNextButton(show: Boolean): BubbleShowCaseBuilder {
-        mShowNextButton = show
+    fun nextButtonText(text: String): BubbleShowCaseBuilder {
+        mNextButtonText = text
         return this
     }
 
     /**
-     *  Set a text of Next Button
-     *  Default value -> Next
+     * If this variable is set, label button will be Visible
      */
-    fun setNextButtonText(text: String): BubbleShowCaseBuilder {
-        mNextButtonText = text
+    fun labelButtonText(text: String): BubbleShowCaseBuilder {
+        mLabelButtonText = text
         return this
     }
 

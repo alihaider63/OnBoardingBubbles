@@ -30,4 +30,9 @@ interface BubbleShowCaseListener {
      * if you set next button true, then you should implement this method
      */
     fun onNextButtonClick() {}
+
+    /**
+     * It is called when the user clicks on the label button
+     */
+    fun onLabelButtonClick() {}
 }

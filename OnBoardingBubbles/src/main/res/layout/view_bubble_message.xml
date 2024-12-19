@@ -4,11 +4,11 @@
     android:id="@+id/showCaseMessageViewLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="36dp"
+    android:maxWidth="420dp"
     android:paddingLeft="36dp"
-    android:paddingRight="20dp"
     android:paddingTop="20dp"
-    android:maxWidth="420dp">
+    android:paddingRight="20dp"
+    android:paddingBottom="30dp">
 
     <ImageView
         android:id="@+id/imageViewShowCase"
@@ -16,11 +16,24 @@
         android:layout_height="48dp"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:visibility="gone"
         android:layout_marginTop="16dp"
+        android:contentDescription="@null"
         android:src="@drawable/rounded_rectangle"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewShowCaseClose"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@null"
+        android:padding="6dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_close_grey_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
@@ -28,20 +41,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/barrier"
         app:layout_constraintEnd_toStartOf="@id/imageViewShowCaseClose"
         app:layout_constraintStart_toEndOf="@+id/imageViewShowCase"
-        app:layout_constraintBottom_toTopOf="@id/nextButton"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/imageViewShowCaseClose">
 
         <TextView
             android:id="@+id/textViewShowCaseTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:breakStrategy="simple"
-            android:text="Title"
             android:fontFamily="@font/nunito_bold"
+            android:text="@string/title"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:visibility="gone" />
@@ -53,37 +66,48 @@
             android:layout_marginTop="2dp"
             android:breakStrategy="simple"
             android:fontFamily="@font/nunito"
-            android:visibility="gone"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="gone" />
 
     </LinearLayout>
 
-
-    <ImageView
-        android:id="@+id/imageViewShowCaseClose"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:padding="6dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_close_grey_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="nextButton,labelButton" />
 
     <Button
         android:id="@+id/nextButton"
         android:layout_width="70dp"
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/button_bg"
         android:text="@string/next_label"
-        android:textSize="11sp"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        android:textSize="11sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutTexts" />
+        app:layout_constraintTop_toBottomOf="@+id/barrier" />
+
+    <TextView
+        android:id="@+id/labelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="@string/got_it_label"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barrier" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

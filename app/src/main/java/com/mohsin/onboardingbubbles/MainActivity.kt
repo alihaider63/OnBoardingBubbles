@@ -50,15 +50,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getTextSizeShowCaseBuilder(): BubbleShowCaseBuilder {
         return BubbleShowCaseBuilder(this)
-            .title("Change text sizes!")
-            .description("You can also choose the best text size for you.")
-            .backgroundColor(ContextCompat.getColor(this, R.color.colorTeal))
-            .image(ContextCompat.getDrawable(this, R.drawable.ic_format_size)!!)
-            .titleTextSize(18)
-            .descriptionTextSize(16)
-            .closeActionImage(null)
-            .showNextButton(true)
-            .setNextButtonText("Finish")
+            .title(getString(R.string.example))
+            .closeActionImage(ContextCompat.getDrawable(this, R.drawable.ic_close))
+            .backgroundColor(ContextCompat.getColor(this, R.color.tool_tips_color))
+            .titleTextSize(15)
+            .disableCloseAction(false)
             .targetView(binding.buttonTextSizeShowCase)
     }
 

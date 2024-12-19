@@ -32,6 +32,7 @@ class BubbleMessageView : ConstraintLayout {
     private var imageViewClose: ImageView? = null
     private var showCaseMessageViewLayout: ConstraintLayout? = null
     private var nextButton: Button? = null
+    private var labelButton: TextView? = null
 
     private var targetViewScreenLocation: RectF? = null
     private var mBackgroundColor: Int = ContextCompat.getColor(context, R.color.blue_default)
@@ -71,6 +72,7 @@ class BubbleMessageView : ConstraintLayout {
         textViewSubtitle = findViewById(R.id.textViewShowCaseText)
         showCaseMessageViewLayout = findViewById(R.id.showCaseMessageViewLayout)
         nextButton = findViewById(R.id.nextButton)
+        labelButton = findViewById(R.id.labelButton)
     }
 
     private fun setAttributes(builder: Builder) {
@@ -115,12 +117,14 @@ class BubbleMessageView : ConstraintLayout {
         arrowPositionList = builder.mArrowPosition
         targetViewScreenLocation = builder.mTargetViewScreenLocation
 
-        if (builder.mShowNextButton) {
+        builder.mNextButtonText?.let { text ->
             nextButton?.visibility = View.VISIBLE
+            nextButton?.text = text
         }
 
-        if (builder.mNextButtonText != null) {
-            nextButton?.text = builder.mNextButtonText
+        builder.mLabelButtonText?.let { text ->
+            labelButton?.visibility = View.VISIBLE
+            labelButton?.text = text
         }
     }
 
@@ -128,18 +132,16 @@ class BubbleMessageView : ConstraintLayout {
         imageViewClose?.setOnClickListener { builder.mListener?.onCloseActionImageClick() }
         itemView?.setOnClickListener { builder.mListener?.onBubbleClick() }
         nextButton?.setOnClickListener { builder.mListener?.onNextButtonClick() }
+        labelButton?.setOnClickListener { builder.mListener?.onLabelButtonClick() }
     }
-
-    //REGION AUX FUNCTIONS
 
     private fun getViewWidth(): Int = width
 
     private fun getMargin(): Int = ScreenUtils.dpToPx(20)
 
-    private fun getSecurityArrowMargin(): Int =
-        getMargin() + ScreenUtils.dpToPx(2 * WIDTH_ARROW / 3)
-
-    //REGION SHOW ITEM
+    private fun getSecurityArrowMargin(): Int {
+        return getMargin() + ScreenUtils.dpToPx(2 * WIDTH_ARROW / 3)
+    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -185,6 +187,7 @@ class BubbleMessageView : ConstraintLayout {
                         targetViewLocationOnScreen
                     ) else height / 2
             }
+
             BubbleShowCase.ArrowPosition.RIGHT -> {
                 xPosition = getViewWidth() - getMargin()
                 yPosition =
@@ -192,6 +195,7 @@ class BubbleMessageView : ConstraintLayout {
                         targetViewLocationOnScreen
                     ) else height / 2
             }
+
             BubbleShowCase.ArrowPosition.TOP -> {
                 xPosition =
                     if (targetViewLocationOnScreen != null) getArrowHorizontalPositionDependingOnTarget(
@@ -199,6 +203,7 @@ class BubbleMessageView : ConstraintLayout {
                     ) else width / 2
                 yPosition = getMargin()
             }
+
             BubbleShowCase.ArrowPosition.BOTTOM -> {
                 xPosition =
                     if (targetViewLocationOnScreen != null) getArrowHorizontalPositionDependingOnTarget(
@@ -291,8 +296,8 @@ class BubbleMessageView : ConstraintLayout {
         var mSubtitleTextSize: Int? = null
         var mArrowPosition = ArrayList<BubbleShowCase.ArrowPosition>()
         var mListener: OnBubbleMessageViewListener? = null
-        var mShowNextButton: Boolean = false
         var mNextButtonText: String? = null
+        var mLabelButtonText: String? = null
 
         fun from(context: Context): Builder {
             mContext = WeakReference(context)
@@ -355,13 +360,13 @@ class BubbleMessageView : ConstraintLayout {
             return this
         }
 
-        fun showNextButton(showNextButton: Boolean): Builder {
-            mShowNextButton = showNextButton
+        fun nextButtonText(text: String?): Builder {
+            mNextButtonText = text
             return this
         }
 
-        fun setNextButtonText(text: String?): Builder {
-            mNextButtonText = text
+        fun labelButtonText(text: String?): Builder {
+            mLabelButtonText = text
             return this
         }
 
