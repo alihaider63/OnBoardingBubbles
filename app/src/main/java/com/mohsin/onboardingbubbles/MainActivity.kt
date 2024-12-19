@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             .closeActionImage(ContextCompat.getDrawable(this, R.drawable.ic_close))
             .backgroundColor(ContextCompat.getColor(this, R.color.tool_tips_color))
             .titleTextSize(15)
-            .disableCloseAction(false)
+            .labelButtonText("Next")
             .targetView(binding.buttonTextSizeShowCase)
     }
 
