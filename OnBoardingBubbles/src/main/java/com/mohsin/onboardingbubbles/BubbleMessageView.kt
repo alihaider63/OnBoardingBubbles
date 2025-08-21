@@ -77,53 +77,50 @@ class BubbleMessageView : ConstraintLayout {
 
     private fun setAttributes(builder: Builder) {
         if (builder.mImage != null) {
-            imageViewIcon?.visibility = View.VISIBLE
-            imageViewIcon?.setImageDrawable(builder.mImage!!)
-        }
-        if (builder.mCloseAction != null) {
-            imageViewClose?.visibility = View.VISIBLE
-            imageViewClose?.setImageDrawable(builder.mCloseAction!!)
+            imageViewIcon?.visibility = VISIBLE
+            imageViewIcon?.setImageDrawable(builder.mImage)
         }
 
-        if (builder.mDisableCloseAction != null && builder.mDisableCloseAction!!) {
-            imageViewClose?.visibility = View.INVISIBLE
+        if (builder.mCloseAction != null) {
+            imageViewClose?.visibility = VISIBLE
+            imageViewClose?.setImageDrawable(builder.mCloseAction)
+        }
+
+        if (builder.mDisableCloseAction != null && builder.mDisableCloseAction == true) {
+            imageViewClose?.visibility = INVISIBLE
         }
 
         builder.mTitle?.let {
-            textViewTitle?.visibility = View.VISIBLE
+            textViewTitle?.visibility = VISIBLE
             textViewTitle?.text = builder.mTitle
         }
         builder.mSubtitle?.let {
-            textViewSubtitle?.visibility = View.VISIBLE
+            textViewSubtitle?.visibility = VISIBLE
             textViewSubtitle?.text = builder.mSubtitle
         }
-        builder.mTextColor?.let {
-            textViewTitle?.setTextColor(builder.mTextColor!!)
-            textViewSubtitle?.setTextColor(builder.mTextColor!!)
+        builder.mTextColor?.let { textColor ->
+            textViewTitle?.setTextColor(textColor)
+            textViewSubtitle?.setTextColor(textColor)
         }
-        builder.mTitleTextSize?.let {
-            textViewTitle?.setTextSize(
-                TypedValue.COMPLEX_UNIT_SP,
-                builder.mTitleTextSize!!.toFloat()
-            )
+        builder.mTitleTextSize?.let { textSize ->
+            textViewTitle?.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
         }
-        builder.mSubtitleTextSize?.let {
-            textViewSubtitle?.setTextSize(
-                TypedValue.COMPLEX_UNIT_SP,
-                builder.mSubtitleTextSize!!.toFloat()
-            )
+        builder.mSubtitleTextSize?.let { textSize ->
+            textViewSubtitle?.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
         }
-        builder.mBackgroundColor?.let { mBackgroundColor = builder.mBackgroundColor!! }
+        builder.mBackgroundColor?.let { background ->
+            mBackgroundColor = background
+        }
         arrowPositionList = builder.mArrowPosition
         targetViewScreenLocation = builder.mTargetViewScreenLocation
 
         builder.mNextButtonText?.let { text ->
-            nextButton?.visibility = View.VISIBLE
+            nextButton?.visibility = VISIBLE
             nextButton?.text = text
         }
 
         builder.mLabelButtonText?.let { text ->
-            labelButton?.visibility = View.VISIBLE
+            labelButton?.visibility = VISIBLE
             labelButton?.text = text
         }
     }
@@ -156,9 +153,9 @@ class BubbleMessageView : ConstraintLayout {
 
     private fun prepareToDraw() {
         paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        paint!!.color = mBackgroundColor
-        paint!!.style = Paint.Style.FILL
-        paint!!.strokeWidth = 4.0f
+        paint?.color = mBackgroundColor
+        paint?.style = Paint.Style.FILL
+        paint?.strokeWidth = 4.0f
     }
 
     private fun drawRectangle(canvas: Canvas) {
@@ -182,33 +179,37 @@ class BubbleMessageView : ConstraintLayout {
         when (arrowPosition) {
             BubbleShowCase.ArrowPosition.LEFT -> {
                 xPosition = getMargin()
-                yPosition =
-                    if (targetViewLocationOnScreen != null) getArrowVerticalPositionDependingOnTarget(
-                        targetViewLocationOnScreen
-                    ) else height / 2
+                yPosition = if (targetViewLocationOnScreen != null) {
+                    getArrowVerticalPositionDependingOnTarget(targetViewLocationOnScreen)
+                } else {
+                    height / 2
+                }
             }
 
             BubbleShowCase.ArrowPosition.RIGHT -> {
                 xPosition = getViewWidth() - getMargin()
-                yPosition =
-                    if (targetViewLocationOnScreen != null) getArrowVerticalPositionDependingOnTarget(
-                        targetViewLocationOnScreen
-                    ) else height / 2
+                yPosition = if (targetViewLocationOnScreen != null) {
+                    getArrowVerticalPositionDependingOnTarget(targetViewLocationOnScreen)
+                } else {
+                    height / 2
+                }
             }
 
             BubbleShowCase.ArrowPosition.TOP -> {
-                xPosition =
-                    if (targetViewLocationOnScreen != null) getArrowHorizontalPositionDependingOnTarget(
-                        targetViewLocationOnScreen
-                    ) else width / 2
+                xPosition = if (targetViewLocationOnScreen != null) {
+                    getArrowHorizontalPositionDependingOnTarget(targetViewLocationOnScreen)
+                } else {
+                    width / 2
+                }
                 yPosition = getMargin()
             }
 
             BubbleShowCase.ArrowPosition.BOTTOM -> {
-                xPosition =
-                    if (targetViewLocationOnScreen != null) getArrowHorizontalPositionDependingOnTarget(
-                        targetViewLocationOnScreen
-                    ) else width / 2
+                xPosition = if (targetViewLocationOnScreen != null) {
+                    getArrowHorizontalPositionDependingOnTarget(targetViewLocationOnScreen)
+                } else {
+                    width / 2
+                }
                 yPosition = height - getMargin()
             }
         }

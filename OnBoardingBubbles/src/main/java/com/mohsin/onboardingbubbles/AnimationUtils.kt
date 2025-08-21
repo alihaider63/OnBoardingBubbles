@@ -23,11 +23,11 @@ object AnimationUtils {
         return anim
     }
 
-    fun getFadeInAnimation(offset: Int, duration: Int): Animation {
+    fun getFadeInAnimation(offset: Int, duration: Long): Animation {
         val fadeIn = AlphaAnimation(0f, 1f)
         fadeIn.startOffset = offset.toLong()
         fadeIn.interpolator = DecelerateInterpolator()
-        fadeIn.duration = duration.toLong()
+        fadeIn.duration = duration
         return fadeIn
     }
 

@@ -71,7 +71,7 @@ class BubbleShowCaseBuilder(activity: Activity) {
      *  - If this param is not passed, the BubbleShowCase will not have main image
      */
     fun imageResourceId(resId: Int): BubbleShowCaseBuilder {
-        mImage = mActivity!!.get()?.let { ContextCompat.getDrawable(it, resId) }
+        mImage = mActivity?.get()?.let { ContextCompat.getDrawable(it, resId) }
         return this
     }
 
@@ -89,7 +89,7 @@ class BubbleShowCaseBuilder(activity: Activity) {
      *  - If this param is not defined, a default close icon is displayed
      */
     fun closeActionImageResourceId(resId: Int): BubbleShowCaseBuilder {
-        mCloseAction = mActivity!!.get()?.let { ContextCompat.getDrawable(it, resId) }
+        mCloseAction = mActivity?.get()?.let { ContextCompat.getDrawable(it, resId) }
         return this
     }
 
@@ -108,7 +108,7 @@ class BubbleShowCaseBuilder(activity: Activity) {
      *  - #3F51B5 color will be set if this param is not defined
      */
     fun backgroundColorResourceId(colorResId: Int): BubbleShowCaseBuilder {
-        mBackgroundColor = mActivity!!.get()?.let { ContextCompat.getColor(it, colorResId) }
+        mBackgroundColor = mActivity?.get()?.let { ContextCompat.getColor(it, colorResId) }
         return this
     }
 
@@ -126,7 +126,7 @@ class BubbleShowCaseBuilder(activity: Activity) {
      *  - White color will be set if this param is not defined
      */
     fun textColorResourceId(colorResId: Int): BubbleShowCaseBuilder {
-        mTextColor = mActivity!!.get()?.let { ContextCompat.getColor(it, colorResId) }
+        mTextColor = mActivity?.get()?.let { ContextCompat.getColor(it, colorResId) }
         return this
     }
 
@@ -279,8 +279,8 @@ class BubbleShowCaseBuilder(activity: Activity) {
     fun show(): BubbleShowCase {
         val bubbleShowCase = build()
         if (mTargetView != null) {
-            val targetView = mTargetView!!.get()
-            if (targetView!!.height == 0 || targetView.width == 0) {
+            val targetView = mTargetView?.get()
+            if (targetView?.height == 0 || targetView?.width == 0) {
                 //If the view is not already painted, we wait for it waiting for view changes using OnGlobalLayoutListener
                 onGlobalLayoutListenerTargetView = ViewTreeObserver.OnGlobalLayoutListener {
                     bubbleShowCase.show()
