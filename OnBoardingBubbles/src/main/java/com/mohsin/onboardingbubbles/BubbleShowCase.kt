@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.os.Handler
@@ -17,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import com.mohsin.onboardingbubbles.ScreenUtils.dpToPx
 import java.lang.ref.WeakReference
+import androidx.core.graphics.createBitmap
 
 class BubbleShowCase(builder: BubbleShowCaseBuilder) {
 
@@ -465,24 +467,18 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder) {
         return takeScreenshotOfSurfaceView(targetView)
     }
 
-    private fun takeScreenshotOfLayoutView(targetView: View): Bitmap? {
+    fun takeScreenshotOfLayoutView(targetView: View): Bitmap? {
         if (targetView.width == 0 || targetView.height == 0) {
             return null
         }
-
-        val rootView = getViewRoot(mActivity.get()!!)
-        val currentScreenView = rootView.getChildAt(0)
-        currentScreenView.buildDrawingCache()
-        val bitmap: Bitmap = Bitmap.createBitmap(
-            currentScreenView.drawingCache,
-            getXPosition(targetView),
-            getYPosition(targetView),
-            targetView.width,
-            targetView.height
-        )
-        currentScreenView.isDrawingCacheEnabled = false
-        currentScreenView.destroyDrawingCache()
-        return bitmap
+        try {
+            val bitmap = createBitmap(targetView.width, targetView.height)
+            val canvas = Canvas(bitmap)
+            targetView.draw(canvas)
+            return bitmap
+        } catch (_: Exception) {
+            return null
+        }
     }
 
     private fun takeScreenshotOfSurfaceView(targetView: View): Bitmap? {
@@ -490,10 +486,14 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder) {
             return null
         }
 
-        targetView.isDrawingCacheEnabled = true
-        val bitmap: Bitmap = Bitmap.createBitmap(targetView.drawingCache)
-        targetView.isDrawingCacheEnabled = false
-        return bitmap
+        try {
+            targetView.isDrawingCacheEnabled = true
+            val bitmap: Bitmap = Bitmap.createBitmap(targetView.drawingCache)
+            targetView.isDrawingCacheEnabled = false
+            return bitmap
+        } catch (_: Exception) {
+            return null
+        }
     }
 
     private fun isVisibleOnScreen(targetView: View?): Boolean {
